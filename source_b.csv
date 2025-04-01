@@ -1,0 +1,11 @@
+channel,topic,date,severity_level,origin,signal_strength,engagement_percent,post_volume
+Facebook,5G tower arson,10/2/2023,Severe,OpenIntel,88,4.2,14
+YouTube,Bank insolvency panic,2/12/2024,Moderate,OpenIntel,60,3,8
+Reddit,False vaccine alert,3/1/2025,Severe,OpenIntel,70,4.6,13
+Twitter,Food contamination scare,8/25/2023,Mild,OpenIntel,39,1.9,6
+Instagram,Social unrest hoax,11/19/2024,Severe,OpenIntel,84,4.7,15
+Reddit,Market crash prediction,1/8/2025,Moderate,OpenIntel,64,3.2,10
+Facebook,Political disinfo spike,9/30/2023,Severe,OpenIntel,81,4.4,12
+YouTube,Military coup rumor,3/15/2025,Severe,OpenIntel,86,5.1,16
+Twitter,Deepfake video spread,6/20/2024,Moderate,OpenIntel,57,2.8,9
+Instagram,Election fraud panic,5/1/2024,Severe,OpenIntel,79,4.9,13
