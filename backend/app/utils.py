@@ -78,7 +78,7 @@ def fetch_and_filter_data(filters_json: str):
     filters = json.loads(filters_json)
     return [
         {
-            "platform": "Twitter",
+            "platform": "Reddit",
             "narrative": "5G tower arson",
             "date_detected": "2023-09-18",
             "severity_level": "High",

@@ -61,3 +61,26 @@ def get_all_tasks():
     if not tasks:
         return JSONResponse(content=[], status_code=200)
     return JSONResponse(content=result)
+
+@app.get("/tasks/{task_id}/records")
+def get_task_records(task_id: int):
+    session = SessionLocal()
+    task = session.query(Task).filter(Task.id == task_id).first()
+    if not task:
+        session.close()
+        raise HTTPException(status_code=404, detail="Task not found")
+
+    records = session.query(ThreatRecord).filter(ThreatRecord.task_id == task_id).all()
+
+    result = [{
+        "platform": r.platform,
+        "narrative": r.narrative,
+        "date_detected": r.date_detected,
+        "severity_level": r.severity_level,
+        "reach_score": r.reach_score,
+        "engagement_rate": r.engagement_rate,
+        "incident_count": r.incident_count
+    } for r in records]
+
+    session.close()
+    return JSONResponse(content=result)
