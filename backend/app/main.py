@@ -1,12 +1,63 @@
-from fastapi import FastAPI
-from .db import init_db
-
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from .db import init_db, SessionLocal
+from .models import Task
+from .jobs import job_queue, start_worker
+import json
+from .models import ThreatRecord, Task
+from fastapi.responses import JSONResponse
+from fastapi import status
+from datetime import datetime
 app = FastAPI()
+
+class TaskRequest(BaseModel):
+    start_date: str
+    end_date: str
+    severity_levels: list[str] = []
+    platforms: list[str] = []
 
 @app.on_event("startup")
 def startup_event():
     init_db()
+    start_worker()
+
+
+@app.post("/tasks/")
+def create_task(task_req: TaskRequest):
+    session = SessionLocal()
+    filters = task_req.dict()
+    task = Task(status="pending", filters=json.dumps(filters))
+    session.add(task)
+    session.commit()
+    session.refresh(task)
+    job_queue.put(task.id)
+    session.close()
+    return JSONResponse(
+    content={"task_id": task.id, "status": "pending"},
+    status_code=status.HTTP_201_CREATED
+)
 
 @app.get("/")
 def root():
     return {"status": "Backend is running"}
+
+@app.get("/tasks/")
+def get_all_tasks():
+    session = SessionLocal()
+    tasks = session.query(Task).all()
+
+    result = []
+    for task in tasks:
+        record_count = session.query(ThreatRecord).filter(ThreatRecord.task_id == task.id).count()
+        result.append({
+            "task_id": task.id,
+            "status": task.status,
+            "created_at": task.created_at.isoformat(),
+            "filters": json.loads(task.filters),
+            "record_count": record_count
+        })
+
+    session.close()
+    if not tasks:
+        return JSONResponse(content=[], status_code=200)
+    return JSONResponse(content=result)
