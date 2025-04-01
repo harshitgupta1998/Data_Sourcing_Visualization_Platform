@@ -1,0 +1,34 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+*.log
+.env
+venv/
+.env.*
+
+# === FastAPI / Uvicorn Logs ===
+*.pid
+*.log
+
+# === VS Code ===
+.vscode/
+
+# === Node.js ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === React/Vite Build Files ===
+frontend/dist/
+frontend/.vite/
+
+# === Mac / System ===
+.DS_Store
+Thumbs.db
+
+# === IDEs ===
+.idea/
+*.iml
