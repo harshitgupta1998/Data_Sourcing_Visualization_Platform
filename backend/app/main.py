@@ -8,7 +8,16 @@ from .models import ThreatRecord, Task
 from fastapi.responses import JSONResponse
 from fastapi import status
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"], 
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow POST, GET, etc.
+    allow_headers=["*"],
+)
 
 class TaskRequest(BaseModel):
     start_date: str
@@ -24,6 +33,7 @@ def startup_event():
 
 @app.post("/tasks/")
 def create_task(task_req: TaskRequest):
+    print('Creating task with filters:', task_req)
     session = SessionLocal()
     filters = task_req.dict()
     task = Task(status="pending", filters=json.dumps(filters))
@@ -84,3 +94,38 @@ def get_task_records(task_id: int):
 
     session.close()
     return JSONResponse(content=result)
+
+
+@app.delete("/tasks/{task_id}")
+def delete_task(task_id: int):
+    session = SessionLocal()
+    task = session.query(Task).filter(Task.id == task_id).first()
+
+    if not task:
+        session.close()
+        raise HTTPException(status_code=404, detail="Task not found")
+
+    session.query(ThreatRecord).filter(ThreatRecord.task_id == task_id).delete()
+    session.delete(task)
+    session.commit()
+    session.close()
+    return JSONResponse(content={"message": "Task deleted", "task_id": task_id})
+
+@app.put("/tasks/{task_id}")
+def update_task(task_id: int, task_req: TaskRequest):
+    session = SessionLocal()
+    task = session.query(Task).filter(Task.id == task_id).first()
+
+    if not task:
+        session.close()
+        raise HTTPException(status_code=404, detail="Task not found")
+
+    if task.status != "pending":
+        session.close()
+        raise HTTPException(status_code=400, detail="Only pending tasks can be updated")
+
+    task.filters = json.dumps(task_req.dict())
+    session.commit()
+    session.refresh(task)
+    session.close()
+    return JSONResponse(content={"message": "Task updated", "task_id": task.id})

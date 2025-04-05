@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useState } from "react";
+import TaskForm from "./components/TaskForm";
+import TaskSelector from "./components/TaskSelector";
+import TaskDashboard from "./components/TaskDashboard";
 
 function App() {
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    fetch('http://localhost:8000/')
-      .then(res => res.json())
-      .then(setData)
-  }, [])
+  const [refresh, setRefresh] = useState(0);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   return (
-    <div>
-      <h1>Threat Intelligence Dashboard</h1>
-      <p>Backend says: {data?.status}</p>
+    <div className="p-4">
+      <h1>🧠 Threat Intelligence Dashboard</h1>
+      <TaskForm onTaskCreated={() => setRefresh(prev => prev + 1)} />
+      <TaskSelector onSelectTask={setSelectedTaskId} key={refresh} />
+      {selectedTaskId && <TaskDashboard taskId={selectedTaskId} />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
