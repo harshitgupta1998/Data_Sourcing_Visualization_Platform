@@ -56,33 +56,49 @@ const TaskForm = ({ onTaskCreated }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-6">
-      <h2>Create New Task</h2>
-      <label>Start Date:
-        <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-      </label>
-      <label>End Date:
-        <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
-      </label>
+<form onSubmit={handleSubmit} className="mb-6" >
+  <h2 className="mb-4">Create New Task</h2>
 
-      <label>Platforms:
-        <select multiple value={platforms} onChange={e => setPlatforms([...e.target.selectedOptions].map(o => o.value))}>
-          {platformOptions.map(p => (
-            <option key={p} value={p}>{p}</option>
-          ))}
-        </select>
-      </label>
+  <div className="flex flex-wrap gap-6 items-center mb-4">
+    <div className="flex items-center gap-2">
+      <label>Start Date:</label>
+      <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
+    </div>
 
-      <label>Severity Levels:
-        <select multiple value={severityLevels} onChange={e => setSeverityLevels([...e.target.selectedOptions].map(o => o.value))}>
-          {severityOptions.map(s => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-      </label>
+    <div className="flex items-center gap-2">
+      <label>End Date:</label>
+      <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
+    </div>
 
-      <button type="submit">Create Task</button>
-    </form>
+    <div className="flex items-center gap-2">
+      <label>Platforms:</label>
+      <select
+        multiple
+        value={platforms}
+        onChange={e => setPlatforms([...e.target.selectedOptions].map(o => o.value))}
+      >
+        {platformOptions.map(p => (
+          <option key={p} value={p}>{p}</option>
+        ))}
+      </select>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <label>Severity Levels:</label>
+      <select
+        multiple
+        value={severityLevels}
+        onChange={e => setSeverityLevels([...e.target.selectedOptions].map(o => o.value))}
+      >
+        {severityOptions.map(s => (
+          <option key={s} value={s}>{s}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+  <button type="submit">Create Task</button>
+</form>
   );
 };
 

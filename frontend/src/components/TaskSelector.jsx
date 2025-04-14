@@ -49,7 +49,7 @@ const TaskSelector = ({ onSelectTask }) => {
         ))}
       </select>
 
-      <div style={{ marginTop: "10px" }}>
+      <div style={{ marginTop: "10px" ,flexDirection: 'row', display: 'flex', gap: '10px'}}>
         <button onClick={handleView} disabled={!selectedTaskId} style={{ marginRight: "10px" }}>
           View
         </button>

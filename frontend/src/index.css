@@ -24,9 +24,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  
   min-height: 100vh;
 }
 
@@ -81,10 +79,13 @@ h1, h2 {
 form {
   background: #fff;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 20px solid #fff;
   border-radius: 6px;
-  max-width: 500px;
+  max-width: 50%;
   margin-bottom: 20px;
+  position: 'absolute';
+  left: '0px';
+  
 }
 
 label {

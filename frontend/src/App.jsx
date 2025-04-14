@@ -8,9 +8,10 @@ function App() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   return (
-    <div className="p-4">
+    <div className="p-4" >
       <h1>🧠 Threat Intelligence Dashboard</h1>
       <TaskForm onTaskCreated={() => setRefresh(prev => prev + 1)} />
+      
       <TaskSelector onSelectTask={setSelectedTaskId} key={refresh} />
       {selectedTaskId && <TaskDashboard taskId={selectedTaskId} />}
     </div>
