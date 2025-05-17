@@ -57,21 +57,21 @@ const TaskForm = ({ onTaskCreated }) => {
 
   return (
 <form onSubmit={handleSubmit} className="mb-6" >
-  <h2 className="mb-4">Create New Task</h2>
+  <h2 className="mb-4">Create New Data Sourcing Task</h2>
 
   <div className="flex flex-wrap gap-6 items-center mb-4">
     <div className="flex items-center gap-2">
-      <label>Start Date:</label>
-      <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
+      <label>Start Date</label>
+      <input type="date"  className="custom-date-input" value={startDate} onChange={e => setStartDate(e.target.value)} />
     </div>
 
-    <div className="flex items-center gap-2">
-      <label>End Date:</label>
+    <div className="flex items-center gap-2 ">
+      <label>End Date</label>
       <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
     </div>
 
     <div className="flex items-center gap-2">
-      <label>Platforms:</label>
+      <label>Platforms</label>
       <select
         multiple
         value={platforms}

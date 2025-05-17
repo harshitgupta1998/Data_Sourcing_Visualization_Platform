@@ -15,11 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #000000;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #000000;
 }
 
 body {
@@ -29,9 +29,12 @@ body {
 }
 
 h1 {
-  text-align: center;
-  font-size: 2rem;
+  text-align: left;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
+  font-weight: bold;
+  font-style: roboto;
+  
 }
 
 button {
@@ -41,7 +44,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f4f4f4;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -55,11 +58,11 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #000000;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #000000;
   }
   button {
     background-color: #f9f9f9;
@@ -72,16 +75,19 @@ body {
   padding: 20px;
 }
 
-h1, h2 {
+h2,h3 {
   color: #333;
+  font-size: 1.75rem;
 }
 
 form {
   background: #fff;
   padding: 15px;
-  border: 20px solid #fff;
-  border-radius: 6px;
-  max-width: 50%;
+
+  border: 1px solid #fff;
+  border-radius: 1px;
+  border-color: rgb(216, 216, 216);
+  max-width: 80%;
   margin-bottom: 20px;
   position: 'absolute';
   left: '0px';
@@ -94,7 +100,7 @@ label {
   gap: 4px;
   margin-bottom: 16px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #333;
 }
 
@@ -102,15 +108,17 @@ input, select, button {
   margin-top: 4px;
   display: block;
   width: 100%;
+  background-color: #fff;
+  
   padding: 8px;
   font-size: 1rem;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   border-radius: 4px;
 }
 
 button {
-  background-color: #007bff;
+  background-color: #000000;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -118,7 +126,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #1385ff;
 }
 
 ul {
@@ -170,14 +178,19 @@ li button:hover {
   color: #333;
 }
 
+
 input, select {
   margin-top: 4px;
   width: 100%;
-  padding: 8px;
+  padding: 6px;
+  padding-right: -2px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 4px;
+  color: #000000;
+  border-color: rgb(216, 216, 216);
 }
+
 
 select[multiple] {
   height: 100px;

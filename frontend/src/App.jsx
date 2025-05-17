@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="p-4" >
-      <h1>🧠 Threat Intelligence Dashboard</h1>
+      <h1>Data Sourcing Tasks</h1>
       <TaskForm onTaskCreated={() => setRefresh(prev => prev + 1)} />
       
       <TaskSelector onSelectTask={setSelectedTaskId} key={refresh} />

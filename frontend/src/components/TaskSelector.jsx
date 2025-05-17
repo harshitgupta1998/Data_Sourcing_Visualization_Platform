@@ -35,7 +35,7 @@ const TaskSelector = ({ onSelectTask }) => {
   };
 
   return (
-    <div style={{ margin: "20px 0" }}>
+    <div style={{ margin: "20px 0" , border: "2px solid #fff" }}>
       <h3>Select a Task</h3>
       <select
         value={selectedTaskId || ""}
